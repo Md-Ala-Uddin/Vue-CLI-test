@@ -8,9 +8,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Instructions</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">BLOG</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#blog">BLOG</a>
                         <ul style="list-style:none" class="blog-menu">
-                            <li v-for="blog in blogs" :key="blog.id" @click="selectBlog(blog.id)" class="text-left">
+                            <li v-for="blog in blogs" :key="blog.id" @click.prevent="selectBlog(blog.id)" class="text-left">
                                 <a href="#" style="color:white;text-decoration: none;">{{ blog.title }}</a>
                             </li>
                         </ul>

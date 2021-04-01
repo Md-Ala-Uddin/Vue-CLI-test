@@ -7,4 +7,8 @@ import "./assets/css/styles.css";
 import "jquery/dist/jquery.min.js";
 import "./assets/scripts/scripts.js";
 
+global.jQuery = require("jquery");
+var $ = global.jQuery;
+window.$ = $;
+
 createApp(App).mount('#app')
