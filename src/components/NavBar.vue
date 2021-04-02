@@ -8,10 +8,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Instructions</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#blog">BLOG</a>
-                        <ul style="list-style:none" class="blog-menu">
-                            <li v-for="blog in blogs" :key="blog.id" @click.prevent="selectBlog(blog.id)" class="text-left">
-                                <a href="#" style="color:white;text-decoration: none;">{{ blog.title }}</a>
+                    <li class="nav-item" id="blog-tab">
+                        <a class="nav-link js-scroll-trigger" data-toggle="collapse" data-target="#demo" href="#blog">BLOG <span><i class="fas fa-angle-down"></i></span></a>
+                        <ul id="demo" style="list-style:none" class="blog-menu collapse">
+                            <li v-for="blog in blogs" :key="blog.id" @click.prevent.stop="selectBlog(blog.id, $event)" class="text-left">
+                                <a href="#" class="blog-menu-item">{{ blog.title }}</a>
                             </li>
                         </ul>
                     </li>
@@ -26,15 +27,49 @@
 export default {
     props: ['blogs'],
     methods: {
-        selectBlog(id) {
+        selectBlog(id, event) {
+            let el = event.target;
+            if($(el).hasClass('blog-menu-item')) {
+                $(el).parent().siblings().filter(".active-blog").removeClass('active-blog');
+                $(el).parent().addClass('active-blog');
+            }
             this.$emit('onSelectBlog', id);
         }
+    },
+    mounted() {
+        $("#blog-tab").on("click", function() {
+            $('.fa-angle-down').toggleClass('rotate-angle');
+        });
     }
 };
 </script>
 
 <style scoped>
- .blog-menu li a:hover {
-     color: #893312 !important;
+ .blog-menu li a {
+     color: white;
+     text-decoration: none;
+ }
+
+ 
+
+ .blog-menu.collapse {
+     background: #9a4b2c;
+     padding-left: 0px;
+ }
+
+.blog-menu.collapse li {
+    padding-left: 50px;
+}
+
+ .blog-menu.collapse li:hover {
+     background: #833e23;
+ }
+
+ .active-blog {
+     background: #612e1b;
+ }
+
+ .rotate-angle {
+     transform: rotate(180deg);
  }
 </style>
