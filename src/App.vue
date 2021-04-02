@@ -29,8 +29,15 @@ export default {
               fetch("http://vue-test.gingerbd.com/api/blogs")
               .then(response => response.json())
               .then(json => {
-                this.blogs = json.blogs
-                this.$swal.close();
+                if(json.status == 200) {
+                  this.blogs = json.blogs;
+                  this.$swal.close();
+                } else {
+                  this.$swal({
+                    icon: 'error',
+                    title: 'Could not load list of blogs because of error: \n' + json.message
+                  })
+                }
               });
             }
         });
@@ -43,8 +50,15 @@ export default {
           fetch("http://vue-test.gingerbd.com/api/view-blog/" + id)
           .then(response => response.json())
           .then(json => {
-            this.selectedBlog = json.blogs[0];
-            this.$swal.close();
+            if(json.status == 200) {
+              this.selectedBlog = json.blogs[0];
+              this.$swal.close();
+            } else {
+              this.$swal({
+                icon: 'error',
+                title: 'Could not load blog details beacause of error: \n' + json.message
+              })
+            }
           });
         }
       })
@@ -79,6 +93,8 @@ export default {
                 console.log(json);
                 $("#NewCommentModal").modal("hide");
                 if(json.status == 200) {
+                  this.newComment.user = '';
+                  this.newComment.comment = '';
                   this.$swal({
                     position: 'top-end',
                     icon: 'success',
