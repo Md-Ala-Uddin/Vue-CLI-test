@@ -13,7 +13,7 @@
                     </div>
 					<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
-                            <h5 class="mb-0">Blog Comment<hr></h5>
+                            <h5 class="mb-0" id="blog-comment">Blog Comment<hr></h5>
                             <div v-if="selectedBlog != null">
                                 <div v-for="comment in selectedBlog.all_comments" :key="comment.id" class="subheading mb-1" style="font-size:11pt;">
                                     <i class="fa fa-user"></i>

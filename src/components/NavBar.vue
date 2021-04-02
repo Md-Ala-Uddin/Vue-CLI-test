@@ -33,11 +33,15 @@ export default {
                 $(el).parent().siblings().filter(".active-blog").removeClass('active-blog');
                 $(el).parent().addClass('active-blog');
             }
+            $('html, body').animate({
+              'scrollTop': $('#experience').position().top
+            })
             this.$emit('onSelectBlog', id);
         }
     },
     mounted() {
         $("#blog-tab").on("click", function() {
+            $(this).toggleClass('blog-tab-clicked');
             $('.fa-angle-down').toggleClass('rotate-angle');
         });
     }
@@ -50,7 +54,9 @@ export default {
      text-decoration: none;
  }
 
- 
+.blog-tab-clicked {
+    background: #522819;
+}
 
  .blog-menu.collapse {
      background: #9a4b2c;
